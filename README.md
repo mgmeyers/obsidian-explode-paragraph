@@ -1,1 +1,1 @@
-A simple plugin for breaking up paragraphs into sentences (each on a new line), and vise versa.
+mgmeyers' secret stash. Caution. Keep out. Biohazard.

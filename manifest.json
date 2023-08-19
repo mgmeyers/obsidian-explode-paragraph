@@ -1,10 +1,10 @@
 {
 	"id": "obsidian-explode-paragraph",
-	"name": "Explode Paragraphs",
+	"name": "Writing Tools",
 	"version": "1.0.1",
 	"minAppVersion": "0.9.12",
-	"description": "Split paragraphs so that each sentence is a new line, or join sentences into a paragraph.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md/about",
+	"description": "mgmeyers' secret stash. Caution. Keep out. Biohazard.",
+	"author": "mgmeyers",
+	"authorUrl": "https://github.com/mgmeyers",
 	"isDesktopOnly": false
 }
