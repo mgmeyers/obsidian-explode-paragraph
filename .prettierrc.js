@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = {
   arrowParens: 'always',
   bracketSpacing: true,
@@ -14,7 +13,4 @@ module.exports = {
   tabWidth: 2,
   trailingComma: 'es5',
   useTabs: false,
-  importOrder: ['^[./]'],
-  importOrderSeparation: true,
-  importOrderSortSpecifiers: true,
 };

@@ -1,0 +1,33 @@
+.cm-date {
+    font-family: var(--font-monospace);
+    font-size: var(--code-size);
+}
+
+.cm-date-zone,
+.cm-date.cm-formatting {
+    color: var(--text-faint);
+}
+
+/* .cm-date-date, */
+.cm-date-label {
+    font-weight: var(--bold-weight);
+}
+
+.cm-date-rendered {
+    --icon-size: 1rem;
+
+
+    color: var(--text-muted);
+
+    /* font-family: var(--font-monospace); */
+    font-size: var(--font-smaller);
+    position: relative;
+    top: -1px;
+    display: inline-flex;
+    gap: var(--size-4-1);
+    align-items: center;
+    padding: 4px;
+    line-height: 1;
+    background-color: var(--background-secondary);
+    border-radius: var(--radius-s);
+}

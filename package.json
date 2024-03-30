@@ -5,7 +5,8 @@
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
-		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"build": "node esbuild.config.mjs production",
+		"check-types": "tsc --noemit",
 		"lint": "eslint ./src",
 		"lint:fix": "eslint ./src/**/* --fix",
 		"prettier": "prettier --write \"./src/**/*.{ts,tsx}\"",
@@ -16,6 +17,12 @@
 	"author": "",
 	"license": "GPL-3.0-or-later",
 	"devDependencies": {
+		"@babel/core": "7.17.9",
+		"@babel/preset-env": "7.16.11",
+		"@babel/preset-typescript": "7.16.7",
+		"@codemirror/language": "https://github.com/lishid/cm-language",
+		"@codemirror/state": "^6.4.1",
+		"@codemirror/view": "^6.26.1",
 		"@trivago/prettier-plugin-sort-imports": "4.2.0",
 		"@types/node": "16.11.6",
 		"@typescript-eslint/eslint-plugin": "5.29.0",
@@ -23,10 +30,9 @@
 		"builtin-modules": "3.3.0",
 		"esbuild": "0.17.3",
 		"eslint": "8.47.0",
-		"obsidian": "latest",
+		"obsidian": "^1.5.7-1",
 		"prettier": "3.0.2",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
-	},
-	"dependencies": {}
+	}
 }

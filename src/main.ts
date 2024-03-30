@@ -1,4 +1,5 @@
-import { App, Editor, ListItemCache, Plugin, TFile } from 'obsidian';
+import { App, Editor, ListItemCache, Plugin, TFile, debounce } from 'obsidian';
+import { dateDecoPlugin } from './date-ext';
 
 const listHeaderRE = /^[ \t]*[-*+] @ +/;
 const listCalloutRE = /^[ \t]*[-*+](?: [@~&?!→%^|])? +/;
@@ -145,8 +146,32 @@ function explode(app: App, file: TFile, editor: Editor) {
   editor.setValue(output.join('\n'));
 }
 
+function handleScroll(e: Event) {
+  const target = e.target as HTMLElement;
+  const isScrolled = target.scrollTop !== 0;
+
+  if (
+    target.hasClass('cm-scroller') ||
+    target.hasClass('view-content') ||
+    target.hasClass('nav-files-container')
+  ) {
+    const tabs = target.closest('.workspace-tabs');
+    if (tabs) {
+      if (isScrolled && !tabs.hasClass('is-scrolled')) {
+        tabs.addClass('is-scrolled');
+      } else if (!isScrolled && tabs.hasClass('is-scrolled')) {
+        tabs.removeClass('is-scrolled');
+      }
+    }
+  }
+}
+
 export default class MyPlugin extends Plugin {
   async onload() {
+    this.registerDomEvent(window, 'scroll', debounce((e) => {
+      handleScroll(e)
+    }, 16), true)
+
     this.addCommand({
       id: 'implode',
       name: 'Implode to paragraphs',
@@ -180,5 +205,9 @@ export default class MyPlugin extends Plugin {
         }
       },
     });
+
+    this.registerEditorExtension([
+      dateDecoPlugin
+    ]);
   }
 }
