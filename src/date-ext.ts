@@ -17,20 +17,8 @@ const dateLabel = Decoration.mark({
   class: `cm-date cm-date-label`,
 })
 
-const dateLabelFormatting = Decoration.mark({
-  class: `cm-date cm-date-label cm-formatting`,
-})
-
 const dateDate = Decoration.mark({
   class: `cm-date cm-date-date`,
-})
-
-const dateTime = Decoration.mark({
-  class: `cm-date cm-date-time`,
-})
-
-const dateZ = Decoration.mark({
-  class: `cm-date cm-date-zone`,
 })
 
 class DateWidget extends WidgetType {
@@ -71,7 +59,7 @@ const livePreviewDeco = (label: string, date: Date) => Decoration.replace({
 });
 
 const decorator = new MatchDecorator({
-  regexp: /(\+{)(\s*)(?:(\D[^:]*?)(\s*:\s*))?(\d{4}-\d{2}-\d{2})(T)(\d{2}:\d{2}:\d{2})([+-]\d{2}:\d{2})(\s*)(})/g,
+  regexp: /(\+{)(\s*)(?:(\D[^:]*?)(\s*:\s*))?([^}]+?)(\s*)(})/g,
   decorate(add, from, to, match, view) {
     const isLivePreview = view.state.field(editorLivePreviewField);
     if (isLivePreview && view.state.selection.ranges.every((r) => {
@@ -80,7 +68,7 @@ const decorator = new MatchDecorator({
         !((r.from >= from && r.from <= to) || (r.to >= from && r.to <= to))
       );
     })) {
-      add(from, to, livePreviewDeco(match[3], new Date(match[5] + match[6] + match[7] + match[8])))
+      add(from, to, livePreviewDeco(match[3], new Date(match[5])))
       return;
     }
 
@@ -92,28 +80,15 @@ const decorator = new MatchDecorator({
       const next = pos + len;
       switch (i) {
         case 1:
+        case 4:
+        case 7:
           add(pos, next, dateFormatting);
           break;
         case 3:
           add(pos, next, dateLabel);
           break;
-        case 4:
-          add(pos, next, dateLabelFormatting);
-          break;
         case 5:
           add(pos, next, dateDate);
-          break;
-        case 6:
-          add(pos, next, dateFormatting);
-          break;
-        case 7:
-          add(pos, next, dateTime);
-          break;
-        case 8:
-          add(pos, next, dateZ);
-          break;
-        case 10:
-          add(pos, next, dateFormatting);
           break;
       }
       pos = next;
